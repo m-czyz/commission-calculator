@@ -1,0 +1,12 @@
+version: '3.6'
+
+services:
+  commission-service:
+    image: node:14
+    container_name: commission-service-app
+    user: node
+    env_file: ./.env
+    working_dir: /usr/src/app
+    command: npm run start
+  redis:
+    image: 'redis'
