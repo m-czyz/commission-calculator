@@ -7,5 +7,6 @@ import { TransactionPersistenceService } from './transaction-persistence.service
 @Module({
   imports: [TypeOrmModule.forFeature([TransactionCommissionEntity])],
   providers: [TransactionPersistenceService],
+  exports: [TransactionPersistenceService],
 })
 export class TransactionPersistenceModule {}

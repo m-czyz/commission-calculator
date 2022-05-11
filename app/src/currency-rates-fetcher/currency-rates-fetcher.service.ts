@@ -4,7 +4,7 @@ import { Cache } from 'cache-manager';
 import { Dayjs } from 'dayjs';
 import { lastValueFrom, map } from 'rxjs';
 
-import { CurrencyEnum } from '../commission-calculator/enum/currency.enum';
+import { CurrencyEnum } from '../transaction-processor/enum/currency.enum';
 import { CurrencyRatesResponse } from './currency-rates.response';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class CurrencyRatesFetcherService {
 
   public constructor(private httpService: HttpService, @Inject(CACHE_MANAGER) private cacheManager: Cache) {}
 
-  public async fetchDailyRates(day: Dayjs): Promise<Record<CurrencyEnum, number>> {
+  public async getDailyRates(day: Dayjs): Promise<Record<CurrencyEnum, number>> {
     const formattedDay = day.format('YYYY-MM-DD');
 
     const cached = await this.getFromCache(formattedDay);

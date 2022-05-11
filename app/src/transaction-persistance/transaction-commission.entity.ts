@@ -1,8 +1,9 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, Index, PrimaryColumn } from 'typeorm';
 
-import { CurrencyEnum } from '../commission-calculator/enum/currency.enum';
+import { CurrencyEnum } from '../transaction-processor/enum/currency.enum';
 
-@Entity()
+@Entity('transaction_commission')
+@Index(['clientId', 'date'])
 export class TransactionCommissionEntity {
   @PrimaryColumn()
   public id: string;

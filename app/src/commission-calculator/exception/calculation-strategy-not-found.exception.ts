@@ -1,1 +1,3 @@
-export class CalculationStrategyNotFoundException extends Error {}
+import { InternalServerErrorException } from '@nestjs/common';
+
+export class CalculationStrategyNotFoundException extends InternalServerErrorException {}

@@ -3,7 +3,7 @@ import { Dayjs } from 'dayjs';
 
 import { CurrencyEnum } from '../enum/currency.enum';
 
-export class CommissionTransaction {
+export class Transaction {
   public clientId: number;
   public date: Dayjs;
   public amount: Big;

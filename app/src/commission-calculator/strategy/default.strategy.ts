@@ -1,7 +1,7 @@
 import Big from 'big.js';
 
+import { Transaction } from '../../transaction-processor/model/transaction';
 import { CommissionCalculatorStrategyInterface } from '../interface/commission-calculator-strategy.interface';
-import { CommissionTransaction } from '../model/commission-transaction';
 
 export class DefaultStrategy implements CommissionCalculatorStrategyInterface {
   public constructor(
@@ -9,8 +9,8 @@ export class DefaultStrategy implements CommissionCalculatorStrategyInterface {
     private readonly commissionPercentage = new Big('0.005'),
   ) {}
 
-  public calculate(transaction: CommissionTransaction): Big {
-    const amount = new Big(transaction.amount);
+  public calculate(transaction: Transaction): Big {
+    const amount = transaction.euroAmount;
 
     const commissionPercentageValue = amount.times(this.commissionPercentage);
 
@@ -21,7 +21,7 @@ export class DefaultStrategy implements CommissionCalculatorStrategyInterface {
     return commissionPercentageValue;
   }
 
-  public async isSupported(transaction: CommissionTransaction): Promise<boolean> {
+  public async isSupported(transaction: Transaction): Promise<boolean> {
     return true;
   }
 }

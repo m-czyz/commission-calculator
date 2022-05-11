@@ -14,4 +14,6 @@ export const DATABASE_CONFIG = {
   database: POSTGRES_DB_DATABASE,
   extra: { characterSet: 'UTF8' },
   entities: [TransactionCommissionEntity],
+  logging: 'all',
+  logger: 'advanced-console',
 } as PostgresConnectionOptions;

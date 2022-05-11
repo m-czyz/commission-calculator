@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import Big from 'big.js';
 import { Repository } from 'typeorm';
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 
-import { CurrencyEnum } from '../commission-calculator/enum/currency.enum';
-import { CommissionTransaction } from '../commission-calculator/model/commission-transaction';
+import { CurrencyEnum } from '../transaction-processor/enum/currency.enum';
+import { Transaction } from '../transaction-processor/model/transaction';
 import { TransactionCommissionEntity } from './transaction-commission.entity';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class TransactionPersistenceService {
     private transactionCommissionEntityRepository: Repository<TransactionCommissionEntity>,
   ) {}
 
-  public save(transaction: CommissionTransaction, commissionAmount: Big, commissionCurrency: CurrencyEnum) {
+  public save(transaction: Transaction, commissionAmount: Big, commissionCurrency: CurrencyEnum) {
     return this.transactionCommissionEntityRepository.save({
       id: uuid(),
       clientId: transaction.clientId,
@@ -24,7 +24,7 @@ export class TransactionPersistenceService {
       currency: transaction.currency,
       date: transaction.date.toDate(),
       commissionAmount: commissionAmount.toFixed(2),
-      commissionCurrency: CurrencyEnum.EUR,
+      commissionCurrency: commissionCurrency,
     });
   }
 }

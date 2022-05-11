@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { CommissionCalculatorService } from './commission-calculator.service';
 
 describe('CommissionCalculatorService', () => {

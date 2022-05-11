@@ -1,16 +1,16 @@
 import Big from 'big.js';
 
+import { Transaction } from '../../transaction-processor/model/transaction';
 import { CommissionCalculatorStrategyInterface } from '../interface/commission-calculator-strategy.interface';
-import { CommissionTransaction } from '../model/commission-transaction';
 
 export class ClientDiscountStrategy implements CommissionCalculatorStrategyInterface {
   public constructor(private readonly clientIdsWithDiscount = [42]) {}
 
-  public calculate(transaction: CommissionTransaction): Big {
+  public calculate(transaction: Transaction): Big {
     return new Big('0.05');
   }
 
-  public async isSupported(transaction: CommissionTransaction): Promise<boolean> {
+  public async isSupported(transaction: Transaction): Promise<boolean> {
     return this.clientIdsWithDiscount.includes(transaction.clientId);
   }
 }

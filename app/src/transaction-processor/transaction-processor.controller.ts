@@ -1,17 +1,17 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import { CommissionCalculatorService } from './commission-calculator.service';
-import { CommissionTransactionRequest } from './request/commission-transaction.request';
+import { TransactionCreateRequest } from './request/transaction-create.request';
 import { TransactionCommissionResponse } from './response/transaction-commission.response';
+import { TransactionProcessorService } from './transaction-processor.service';
 
 @ApiTags('commission')
-@Controller('commission-calculator')
-export class CommissionCalculatorController {
-  public constructor(private readonly commissionCalculatorService: CommissionCalculatorService) {}
+@Controller()
+export class TransactionProcessorController {
+  public constructor(private readonly transactionProcessorService: TransactionProcessorService) {}
 
   @Post()
-  @ApiBody({ type: CommissionTransactionRequest })
+  @ApiBody({ type: TransactionCreateRequest })
   @ApiOperation({
     summary: 'Post transaction and get commission',
   })
@@ -21,8 +21,8 @@ export class CommissionCalculatorController {
     type: TransactionCommissionResponse,
   })
   public async calculateTransactionCommission(
-    @Body() dto: CommissionTransactionRequest,
+    @Body() dto: TransactionCreateRequest,
   ): Promise<TransactionCommissionResponse> {
-    return this.commissionCalculatorService.calculateCommission(dto);
+    return this.transactionProcessorService.processTransaction(dto);
   }
 }

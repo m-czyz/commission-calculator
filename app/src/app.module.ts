@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { CommissionCalculatorModule } from './commission-calculator/commission-calculator.module';
 import { DATABASE_CONFIG } from './database-config';
+import { TransactionProcessorModule } from './transaction-processor/transaction-processor.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       ...DATABASE_CONFIG,
     }),
-    CommissionCalculatorModule,
+    TransactionProcessorModule,
   ],
 })
 export class AppModule {}

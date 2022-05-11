@@ -1,4 +1,4 @@
-import { CurrencyEnum } from '../commission-calculator/enum/currency.enum';
+import { CurrencyEnum } from '../transaction-processor/enum/currency.enum';
 
 export interface CurrencyRatesResponse {
   success: boolean;
