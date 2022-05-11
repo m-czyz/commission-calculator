@@ -2,16 +2,16 @@ import { registerDecorator, ValidationArguments, ValidationOptions } from 'class
 
 import { utcDayjs } from '../../utc-dayjs';
 
-export function IsStringDateFormat(dateFormat: string, validationOptions?: ValidationOptions) {
+export function MaxStringDate(max: Date, validationOptions?: ValidationOptions) {
   return function <T>(object: T, propertyName: string) {
     registerDecorator({
-      name: 'IsStringDateFormat',
+      name: 'MaxStringDate',
       target: object.constructor,
       propertyName: propertyName,
       options: validationOptions,
       validator: {
         validate(value: any, args: ValidationArguments) {
-          return typeof value === 'string' && utcDayjs(value, dateFormat, true).isValid();
+          return typeof value === 'string' && utcDayjs(value).isBefore(max);
         },
       },
     });

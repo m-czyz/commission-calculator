@@ -2,7 +2,7 @@ import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConne
 
 import { TransactionCommissionEntity } from './transaction-persistance/transaction-commission.entity';
 
-const { POSTGRES_DB_HOST, POSTGRES_DB_PORT, POSTGRES_DB_USER, POSTGRES_DB_PASSWORD, POSTGRES_DB_DATABASE } =
+const { POSTGRES_DB_HOST, POSTGRES_DB_PORT, POSTGRES_DB_USER, POSTGRES_DB_PASSWORD, POSTGRES_DB_DATABASE, DEBUG } =
   process.env;
 
 export const DATABASE_CONFIG = {
@@ -14,6 +14,5 @@ export const DATABASE_CONFIG = {
   database: POSTGRES_DB_DATABASE,
   extra: { characterSet: 'UTF8' },
   entities: [TransactionCommissionEntity],
-  logging: 'all',
-  logger: 'advanced-console',
+  ...(DEBUG === '1' ? { logging: 'all', logger: 'advanced-console' } : {}),
 } as PostgresConnectionOptions;

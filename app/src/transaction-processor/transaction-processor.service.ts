@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import Big from 'big.js';
-import * as dayjs from 'dayjs';
 
 import { CommissionCalculatorService } from '../commission-calculator/commission-calculator.service';
 import { CurrencyExchangeService } from '../currency-exchange/currency-exchange.service';
 import { TransactionPersistenceService } from '../transaction-persistance/transaction-persistence.service';
+import { utcDayjs } from '../utc-dayjs';
 import { CurrencyEnum } from './enum/currency.enum';
 import { Transaction } from './model/transaction';
 import { TransactionCreateRequest } from './request/transaction-create.request';
@@ -33,7 +33,7 @@ export class TransactionProcessorService {
 
   private async convertRequestIntoModel(dto: TransactionCreateRequest): Promise<Transaction> {
     const amount = new Big(dto.amount);
-    const date = dayjs(dto.date);
+    const date = utcDayjs(dto.date);
 
     if (dto.currency === CurrencyEnum.EUR) {
       return {

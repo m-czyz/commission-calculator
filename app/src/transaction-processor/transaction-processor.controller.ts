@@ -16,7 +16,7 @@ export class TransactionProcessorController {
     summary: 'Post transaction and get commission',
   })
   @ApiResponse({
-    status: 200,
+    status: 201,
     description: 'transaction commission',
     type: TransactionCommissionResponse,
   })
